@@ -1,0 +1,16 @@
+name: pull-request
+
+on:
+  pull_request:
+    types: [edited, synchronize, opened, reopened]
+
+jobs:
+  checks:
+    name: Perform required PR checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require linked issue on PR
+        uses: spotoninc/github-action-require-issue@v1.0-rc
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          valid_issue_state: open
